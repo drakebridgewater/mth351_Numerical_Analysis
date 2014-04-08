@@ -1,0 +1,72 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{graphicx}                                        
+\usepackage{amssymb}                                         
+\usepackage{amsmath}                                         
+\usepackage{amsthm}                                          
+
+\usepackage{alltt}                                           
+\usepackage{float}
+\usepackage{color}
+\usepackage{url}
+
+\usepackage{balance}
+\usepackage[TABBOTCAP, tight]{subfigure}
+\usepackage{enumitem}
+\usepackage{pstricks, pst-node}
+
+\usepackage{geometry}
+\geometry{textheight=8.5in, textwidth=6in}
+
+%random comment
+
+\newcommand{\cred}[1]{{\color{red}#1}}
+\newcommand{\cblue}[1]{{\color{blue}#1}}
+
+\newcommand{\toc}{\tableofcontents}
+
+%\usepackage{hyperref}
+
+\def\name{Drake Bridgewater}
+
+%pull in the necessary preamble matter for pygments output
+%\input{pygments.tex}
+
+%% The following metadata will show up in the PDF properties
+% \hypersetup{
+%   colorlinks = false,
+%   urlcolor = black,
+%   pdfauthor = {\name},
+%   pdfkeywords = {cs411 ``operating systems 2''},
+%   pdftitle = {CS 411 Project 1},
+%   pdfsubject = {CS 311 Project 1},
+%   pdfpagemode = UseNone
+% }
+
+\parindent = 0.0 in
+\parskip = 0.1 in
+
+\begin{document}
+
+\tableofcontents
+
+%input the pygmentized output of mt19937ar.c, using a (hopefully) unique name
+%this file only exists at compile time. Feel free to change that.
+
+\newpage
+
+\section{What do you think the main point of this assignment is?} 
+The purpose of this assignement is to give us an undersanding of how the system mounts storage, work with an api, and further our understanding of linux.
+\section{How did you personally approach the problem? Design decisions, algorithm, etc.}
+This problem was not very difficult to understand the algorithm as we were just modifying the an existing ramdisk to enable encryption 
+\section{How did you ensure your solution was correct? Testing details, for instance.}
+We verified that our patch was correct by patching our vm and running it. This process took quite some time as we had to patch it compile it and verify it. 
+\section{What did you learn?}
+During this project I have learned where some common files are in regards to the kernel. This has opened the doors as to the possibilities to modifying the kernel.
+
+\newpage
+
+\section*{Appendix 1: Source Code}
+%\input{__mt19937ar.c.tex}
+
+\end{document}
