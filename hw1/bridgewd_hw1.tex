@@ -21,6 +21,11 @@
 \newcommand{\cred}[1]{{\color{red}#1}}
 \newcommand{\cblue}[1]{{\color{blue}#1}}
 
+%%keeps text of subsection on same line
+\usepackage{titlesec} 
+\titleformat{\subsection}[runin] 
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{} 
+
 \newcommand{\toc}{\tableofcontents}
 
 \usepackage{hyperref}
@@ -153,13 +158,13 @@ $\begin{bmatrix}
 \end{bmatrix}$? The eigenvalues are 1 and 3\\
 What can you conclude about the conditioning of problem b verses problem a? I can conclude that the problem a has not been well conditioned therefor it is more sensitive to input changes
 
-
+\newpage
 \section{Unstable Recursion}
 \subsection*{a}
 What can you say about the value of the integral $I_n$ as $n$ increases?\\
 What is the limit as $n\rightarrow\infty$?\\
 \includegraphics[]{integralPlot.png}
-\newpage
+
 \subsection*{b} Prove the following recursive identity using integration by parts:
 \[I_0 = e-1\]
 
@@ -173,7 +178,7 @@ u'=e &v= -x+c
 
 \[I_{n+1}=e-nI_n\]
 
-\newpage
+
 \subsection*{c}Implement the recursive formula from (b) in matlab. Do the values appear correct? They appear incorrect as the values do not continuously decrease. 
 \begin{verbatim}
    I=exp(1)-1;
@@ -213,6 +218,7 @@ RESULTS
    24	68366535.240386 
    25	-1709163378.291363 
 \end{verbatim}
+\newpage
 \subsection*{d}
 Explain part c? Not sure but it will have to deal with machine epsilon
 \subsection*{e}

@@ -1,0 +1,319 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{fullpage}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt} 
+\newcommand{\myspace}{0.4cm}
+\pagestyle{empty}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\DeclareMathOperator\erf{erf}
+
+\usepackage[framemethod=TikZ]{mdframed}
+\mdfdefinestyle{MyFrame}{%
+    innertopmargin=\baselineskip,
+    innerbottommargin=\baselineskip,
+    innerrightmargin=20pt,
+    innerleftmargin=20pt,
+    backgroundcolor=gray!10!white}
+
+\def\name{Drake Bridgewater}
+
+%% The following metadata will show up in the PDF properties
+\hypersetup{
+  colorlinks = true,
+  urlcolor = black,
+  pdfauthor = {\name},
+  pdfkeywords = {mth351 ``Numerical Analysis''},
+  pdftitle = {MTH 351: Homework 3},
+  pdfsubject = {MTH 351: Homework 3},
+  pdfpagemode = UseNone
+}
+
+\begin{document}
+\hfill \name
+
+\begin{center}
+
+\large
+\begin{tabular}{L{0.3\linewidth} C{0.3\linewidth} R{0.3\linewidth}}
+\hline
+Assignment 3	&MTH 351 -- Section 010		&\today \\
+\hline
+\end{tabular}
+
+\vspace{\myspace}
+
+{\bf Due Wednesday, April 23 by the end of class.}
+\end{center}
+
+\begin{enumerate}
+
+%%%QUESTION 1
+\item {\bf [10 points]} Consider the following matrix:
+\begin{equation*}
+A=\begin{bmatrix}
+    1    &-6     &~7   & -9\\
+     1    &-5     &~0    &~0\\
+     0     &~1    &-5     &~0\\
+     0     &~0     &~1    &-5
+\end{bmatrix}
+\end{equation*}
+\begin{enumerate} 
+\item Calculate $\Vert A \Vert_{\infty}$,  $\Vert A^{-1} \Vert_{\infty}$, and the condition number in the infinity norm, $\displaystyle \kappa_{\infty} (A)$. You can use Matlab to find $A^{-1}$.
+\begin{mdframed}[style=MyFrame]
+
+$\Vert A \Vert_{\infty} = max_{1 \leq j \leq n} \sum_{i=1} \mid A_{ij}\mid~ \Rightarrow$ max of the rows $\Rightarrow max(23,6,6,6)= 23$
+
+\begin{equation*}
+A^{-1}=\begin{bmatrix}
+   125  &-124   &130  &-225\\
+    25   &-25    &26   &-45\\
+     5   & -5    & 5   & -9\\
+     1   & -1    & 1    &-2
+\end{bmatrix}
+\end{equation*}
+
+
+$\Vert A^{-1} \Vert_{\infty} = max_{1 \leq j \leq n} \sum_{i=1} \mid A^{-1}_{ij}\mid~ \Rightarrow$ max of the rows $\Rightarrow max(604, 121, 24, 5)= 604$ \\
+
+\begin{tabular}{l l l}
+$\displaystyle \kappa_{\infty} (A) = $ $ \Vert A^{-1} \Vert_{\infty} ~ \Vert A \Vert_{\infty} $\\
+& $\Rightarrow ~ \Vert A^{-1} \Vert_{\infty} =604$ \\
+& $~~~~~\Vert A \Vert_{\infty}=23 $ \\
+& & $ \Rightarrow ~ 23\times604=13892 $
+\end{tabular}
+\end{mdframed}
+
+\newpage
+\item Let  $b = [-7,-4,-4,-4]^T$.  Then, the exact solution to the system $Ax=b$ is $x=[1,1,1,1]^T$. 
+
+Suppose the system is perturbed as follows:
+\begin{equation*}
+\tilde{b} = b + 0.01 \begin{bmatrix} -1\\~1\\-1\\~1 \end{bmatrix}
+\end{equation*}
+
+Solve the system $A \tilde{x} = \tilde{b}$ in Matlab, and state the result. How much bigger is the relative error, $\Vert x-\tilde x \Vert_{\infty} / \Vert x \Vert_{\infty}$, compared to the relative difference in the residual, $\displaystyle \Vert b - \tilde{b} \Vert_{\infty}/\Vert b \Vert_{\infty}$? Verify that the magnification of the error is within the bound given by the condition number.
+\begin{mdframed}[style=MyFrame]
+\begin{tabular}{p{3cm} | p{4.5cm} | p{4.5cm}}
+$A \tilde{x} = \tilde{b}$
+\begin{equation*}
+\Rightarrow\begin{bmatrix}
+    0.9496\\
+    0.9979\\
+    1.0076\\
+    1.0095
+\end{bmatrix}
+\end{equation*}
+
+&
+
+$\Vert x-\tilde x \Vert_{\infty} / \Vert x \Vert_{\infty}=.0095$
+&
+
+$\displaystyle \Vert b - \tilde{b} \Vert_{\infty}/\Vert b \Vert_{\infty} = 0.0014$
+    
+\end{tabular}
+\end{mdframed}
+
+\item Compute the condition number of $A$ in the 1-norm and repeat part (b) using this norm.
+\begin{mdframed}[style=MyFrame]
+\begin{tabular}{l l l}
+$\displaystyle \kappa_{1} (A) = $ $ \Vert A^{-1} \Vert_{1} ~ \Vert A \Vert_{1} $\\
+& $\Rightarrow ~ \Vert A^{-1} \Vert_{1} =281$ \\
+& $~~~~~\Vert A \Vert_{1}=14 $  $ \Rightarrow ~ 14\times281=3934 $\\\\
+\end{tabular}
+\\
+\begin{tabular}{p{3cm} | p{4.5cm} | p{4.5cm}}
+$A \tilde{x} = \tilde{b}$
+\begin{equation*}
+\Rightarrow\begin{bmatrix}
+    0.9496\\
+    0.9979\\
+    1.0076\\
+    1.0095
+\end{bmatrix}
+\end{equation*}
+
+&
+
+$\Vert x-\tilde x \Vert_{1} / \Vert x \Vert_{1} = .0096$
+&
+
+$\displaystyle \Vert b - \tilde{b} \Vert_{1}/\Vert b \Vert_{1} = .0014$
+    
+\end{tabular}
+\end{mdframed}
+
+\end{enumerate}
+
+{\bf Note}: You can use the file {\tt a3q1.m} to ensure that you are working with the correct $A$ and $b$ values.
+
+\newpage
+\item {\bf [4 points]} Let $A$ be a strictly diagonally dominant square matrix (i.e. the magnitude of the diagonal entry in each row is larger than the sum of the magnitudes of all the other entries in that row). Show that the Jacobi iteration always converges for matrices of this type.  
+
+Hint: It is sufficient to show that the error goes to zero in the infinity norm.
+
+\begin{mdframed}[style=MyFrame]
+
+
+
+\end{mdframed}
+
+\newpage
+\item {\bf[6 points]} Consider the system $Ax = b$, with 
+\begin{align*}
+A &= \begin{bmatrix}
+ ~9     &-9     &9 \\
+    -9     &10     &-10 \\
+   9     &-10     &14 \\
+\end{bmatrix},
+&b &= \begin{bmatrix}~9 \\-9\\13 \end{bmatrix}
+\end{align*}
+The exact solution to the system is $x = [1, 1, 1]^T$.
+
+{\bf Note}: Please use the file {\tt a3q3.m} for this problem.
+
+\begin{enumerate}
+\item Is the matrix $A$ strictly diagonally dominant? What (if anything) can you conclude from this about whether the Jacobi and Gauss-Seidel algorithms will converge?
+
+\begin{mdframed}[style=MyFrame]
+No, A is not strictly diagonally dominate and because it is not strictly diagonally dominant we cannot conclude anything about the Jacobi and Gauss-Seidel algorithms.\\
+
+$|a_{11}| $ is not $\ge |a_{12}| + |a_{13}|$ since $|9|  $ is not $\ge |-9| + |9|$
+
+$|a_{22}| $ is not $ \ge |a_{21}| + |a_{23}|$ since $|10|  $ is not $\ge |-9| + |-10|$
+
+$|a_{33}| $ is not $ \ge |a_{31}| + |a_{32}|$ since $|14|  $ is not $\ge |-10| + |9|$
+\end{mdframed}
+\item Compute the infinity norms of the matrices $M_j$ and $M_g$ used for the Jacobi and Gauss-Seidel iterations, respectively. What (if anything) can you conclude from these norms about whether the Jacobi and Gauss-Seidel algorithms will converge?
+
+\begin{mdframed}[style=MyFrame]
+$\Vert M_j \Vert_{\infty} = max_{1 \leq j \leq n} \sum_{i=1} \mid M_{ij}\mid~ \Rightarrow$ max sum of the rows $\Rightarrow max(9,10,14)= 14$
+
+$\Vert M_g \Vert_{\infty} = max_{1 \leq j \leq n} \sum_{i=1} \mid M_{ij}\mid~ \Rightarrow$ max sum of the rows $\Rightarrow max(9,19,33)= 33$
+\vspace{9cm}
+
+\end{mdframed}
+\newpage
+\item Use Matlab to find the eigenvalues of $M_j$ and $M_g$. What can you conclude from the eigenvalues about whether the Jacobi and Gauss-Seidel algorithms will converge?
+\begin{mdframed}[style=MyFrame]
+\begin{tabular}{p{5cm} p{5cm}}
+\begin{equation*}
+M_g=\begin{bmatrix}
+	14\\10\\9
+\end{bmatrix}
+\end{equation*}
+&
+\begin{equation*}
+M_j=\begin{bmatrix}
+	9\\10\\14
+\end{bmatrix}
+\end{equation*}
+
+\end{tabular}
+
+\end{mdframed}
+\item Run the Jacobi and Gauss-Seidel iterations using the provided code. Do the results agree with your prediction from part (d)? If the method does converge, how many iterations does it take for the solution to be accurate to all the digits shown?
+\begin{mdframed}[style=MyFrame]
+
+
+
+\end{mdframed}
+\end{enumerate}
+
+{\bf You do not need to submit any code with this assignment -- just a clear writeup of your results.}
+\item {\bf[6 points]} Consider the system $Ax = b$, with
+\begin{align*}
+A &= \begin{bmatrix}
+ ~9     &-9     &9 \\
+  -9     &10     &-10 \\
+   9     &-10     &14 \\
+\end{bmatrix},
+&b &= \begin{bmatrix}~9 \\-9\\13 \end{bmatrix}
+\end{align*}
+The exact solution to the system is $x = [1, 1, 1]^T$.
+
+{\bf Note}: Please use the file {\tt a3q3.m} for this problem.
+
+\begin{enumerate}
+\item Is the matrix $A$ strictly diagonally dominant? What (if anything) can you conclude from this about whether the Jacobi and Gauss-Seidel algorithms will converge? \newline
+
+\begin{mdframed}[style=MyFrame]
+No it is not. We cannot conclude anything about the possibility of the converge from this.
+\end{mdframed}
+
+\item Compute the infinity norms of the matrices $M_j$ and $M_g$ used for the Jacobi and Gauss-Seidel iterations, respectively. What (if anything) can you conclude from these norms about whether the Jacobi and Gauss-Seidel algorithms will converge?
+
+\begin{mdframed}[style=MyFrame]
+First, computing the matrices (using the provided matlab file):
+
+\begin{equation*}
+  M_{j} = \begin{bmatrix}
+     0     &1     &-1 \\
+     .9     &0     &1 \\
+     \frac{9}{14}     &\frac{5}{7}     &0 \\
+  \end{bmatrix}
+M_{g} = \begin{bmatrix}
+ 0     &1     &-1 \\
+ 0     &9     &\frac{1}{10} \\
+0       &0     &\frac{5}{7} \\
+\end{bmatrix}
+\end{equation*}
+
+And what are the infinity norms of these matrices?
+
+\begin{equation*}
+\Vert M_{j} \Vert_{\infty} = |.9| + |0| + |1| = 1.9
+\end{equation*}
+
+\begin{equation*}
+\Vert M_{g} \Vert_{\infty} = |0| + |9| + |.1| = 9.1
+\end{equation*}
+The value for Gauss-Seidel is a bit larger than that of the Jacobi, but neither seem significant. I do not think we can make any conclusions about the convergence of the algorithms from this.
+\end{mdframed}
+
+\item Use Matlab to find the eigenvalues of $M_j$ and $M_g$. What can you conclude from the eigenvalues about whether the Jacobi and Gauss-Seidel algorithms will converge? \newline
+
+\begin{mdframed}[style=MyFrame]
+
+$M_j$ eigenvalues:
+
+  -1.731909601539509,
+   0.952613361883494,
+   0.779296239656013
+
+$M_g$ eigenvalues:
+
+                   0,
+   0.900000000000000,
+   0.714285714285714
+
+What do the eigenvaues say about the convergence?
+
+After some research, I have heard that the rate of convergence can be dependent on the largest eigenvalue. I'm not sure when this applies, but if this were the case, we could predict that $M_g$ would converge faster than $M_j$.
+
+\end{mdframed}
+
+\item Run the Jacobi and Gauss-Seidel iterations using the provided code. Do the results agree with your prediction from part (d)? If the method does converge, how many iterations does it take for the solution to be accurate to all the digits shown? \newline
+\end{enumerate}
+
+\begin{mdframed}[style=MyFrame]
+The Jacobi method does not converge.
+
+The Gauss-Seidal method does converge, but pretty slowly. It takes 27 iterations before we are even within 90\% accuracy for all values.
+
+After 187 iterations the displayed solution is correct for all shown digits.
+
+\end{mdframed}
+
+{\bf You do not need to submit any code with this assignment -- just a clear writeup of your results.}
+\end{enumerate}
+
+\end{document}
+

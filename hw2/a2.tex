@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{fullpage}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt} 
+\newcommand{\myspace}{0.4cm}
+\pagestyle{empty}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\DeclareMathOperator\erf{erf}
+
+\begin{document}
+
+\begin{center}
+
+\large
+\begin{tabular}{L{0.3\linewidth} C{0.3\linewidth} R{0.3\linewidth}}
+\hline
+Assignment 2	&MTH 351 -- Section 010		&Winter 2014 \\
+\hline
+\end{tabular}
+
+\vspace{\myspace}
+
+\end{center}
+
+\begin{enumerate}
+
+%%%QUESTION 1
+\item {\bf [5 points]} Consider the following system of equations:
+
+\begin{equation*}
+\begin{bmatrix}
+3		&-4\alpha \\
+3\alpha	&-1\\
+\end{bmatrix}  \begin{bmatrix}x_1 \\ x_2 \\ \end{bmatrix}= \begin{bmatrix}4 \\ 2 \\ \end{bmatrix},
+\end{equation*}
+where $\alpha$ is some real-valued parameter. For what value(s) of $\alpha$ does the system have:
+\begin{enumerate} 
+\item No solutions?
+\item Infinitely many solutions?
+\item A unique solution?
+\end{enumerate}
+
+\item {\bf[8 points]} Consider the system $Ax = b$, with 
+
+\begin{tabular}{p{4cm} c p{3cm} p{3cm}}
+$A = 
+\begin{bmatrix}
+ ~2     &2     &2 \\
+ -1     &0     &1 \\
+ ~3     &5     &6 \\
+\end{bmatrix} $
+&
+&
+&
+$ b = \begin{bmatrix}-1 \\~3\\~0 \end{bmatrix}$
+\\\\
+\begin{tabular}{| c c c | c |}
+ ~2     &2     &2	& -1\\
+ -1     &0     &1 	& 3\\
+ ~3     &5     &6 	& 0\\
+\end{tabular}
+& $\rightarrow$ 
+&
+\begin{tabular}{ l }
+ $R_2 \Leftrightarrow R_3$      \\
+ $R_2=R_2-2.5R_1$     \\
+ $R_3=R_3-0.5R_2$     \\
+\end{tabular}
+
+&
+\begin{tabular}{| c c c | c |}
+ ~2     &2     &~2	& -1\\
+ -2     &0     &~1 	& $\frac{5}{2}$ \\
+ ~0     &0     &.5 	& $\frac{7}{4}$\\
+\end{tabular}
+\\\\
+& $\rightarrow$ &
+\begin{tabular}{ l }
+      \\
+ $R_2=R_2+2R_1$     \\
+      \\
+\end{tabular}
+&
+\begin{tabular}{| c c c | c |}
+ ~2     &2     &~2	& -1\\
+ ~0     &2     &~3 	& $\frac{1}{2}$ \\
+ ~0     &0     &.5 	& $\frac{7}{4}$\\
+\end{tabular}
+\\\\\\ \hline	 \\
+
+$P = 
+\begin{bmatrix}
+ ~1     &0     &0 \\
+ ~0     &0     &1 \\
+ ~0     &1     &0 \\
+\end{bmatrix} $
+& 
+$L = 
+\begin{bmatrix}
+ ~0     &0     &0 \\
+ ~0     &0     &0 \\
+ ~0     &0     &0 \\
+\end{bmatrix} $
+&
+$U = 
+\begin{bmatrix}
+ ~0     &0     &0 \\
+ ~0     &0     &0 \\
+ ~0     &0     &0 \\
+\end{bmatrix} $
+&
+\begin{tabular}{| c c c | c |}
+ ~2     &2     &~2	& -1\\
+ ~0     &2     &~3 	& $\frac{1}{2}$ \\
+ ~0     &0     &.5 	& $\frac{7}{4}$\\
+\end{tabular}
+
+\end{tabular}
+
+
+
+\begin{enumerate}
+\item Compute the $LU$ factorization of $A$ by hand, and use it to solve the system as shown in class.
+\item Compute the determinant of $A$ using the usual method (see \href{http://en.wikipedia.org/wiki/Determinant#3.C2.A0.C3.97.C2.A03_matrices}{here} if you do not recall how to do this).
+\item Explain how the determinant of any $n \times n$ matrix $A$ can be easily computed from the $LU$ factorization of $A$, using only $n-1$ multiplications. Use your results from parts (a) and (b) to verify that this works for the matrix $A$ of this problem.
+
+Hint: you may use the following result from linear algebra: $\det(AB)$ = $\det(A) \cdot \det(B)$.
+\end{enumerate}
+
+\item {\bf [7 points]} For certain special types of matrix, the $LU$ factorization has a simpler form, which can be computed more efficiently. A {\em positive definite} matrix is a symmetric, $n\times n$ matrix $A$ such that the product $x^TAx$ is positive for any non-zero vector $x \in \mathbb{R}^n$. It can be shown that the matrix
+\begin{equation*}
+A = \begin{bmatrix}
+     ~1    &-2     &~1 \\
+    -2     &~8     &~6 \\
+     ~1     &~6    &19 \\
+\end{bmatrix}
+\end{equation*}
+is positive definite.
+\begin{enumerate}
+\item Compute the $LU$ factorization of $A$ by hand.
+\item You may notice that every {\bf row} of $U$ is a scalar multiple of the corresponding {\bf column} in $L$. Thus, show that you can write the $LU$ factorization of $A$ as
+\begin{equation*}
+A = L D L^T,
+\end{equation*}
+where $L$ is lower triangular and $D$ is a diagonal matrix. This can be done for any symmetric matrix (even if it is not positive definite).
+\item As a consequence of the matrix being positive definite, all the elements in $D$ should be positive. Show that you can therefore write the $LU$ factorization of $A$ as
+\begin{equation*}
+A = LL^T
+\end{equation*}
+where $L$ is a lower triangular matrix (it is not exactly the same lower triangular matrix as you get from the $LU$ factorization). This is known as the Cholesky factorization, and it can be computed for any positive definite matrix.
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
+
