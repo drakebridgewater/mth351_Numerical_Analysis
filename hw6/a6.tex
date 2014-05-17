@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{enumerate}
+\usepackage{fullpage}
+\usepackage[fleqn]{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\setlength{\parindent}{0pt} 
+\newcommand{\myspace}{0.4cm}
+\pagestyle{empty}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\DeclareMathOperator\erf{erf}
+
+\begin{document}
+
+\begin{center}
+
+\large
+\begin{tabular}{L{0.3\linewidth} C{0.3\linewidth} R{0.3\linewidth}}
+\hline
+Assignment 6	&MTH 351 -- Section 010		&Spring 2014 \\
+\hline
+\end{tabular}
+
+\vspace{\myspace}
+
+{\bf Due Wednesday, May 21 by the end of class.}
+\end{center}
+
+\begin{enumerate}
+
+%%%QUESTION 1
+\item {\bf [12 points]} Consider using the Lagrange polynomial to interpolate the function
+\begin{equation*}
+f(x) = \cos \left( \frac{x}{2} \right),
+\end{equation*} 
+using the node points $x_0 = -\pi$, $x_1 = 0$,  $x_2 = \pi$.
+\begin{enumerate}
+\item Compute by hand the second-order interpolating polynomial, $P_2(x)$, for this data using the Lagrange formulation $\displaystyle P_2(x) = \sum_{i=0}^2 f(x_i) L_i(x)$.
+\item Compute $P_2(x)$ by hand using the Newton's divided difference method, and verify that it is the same polynomial that you get in part (a).
+\item Plot $f(x)$ and $P_2(x)$ on the interval $[-\pi, \pi]$, on the same set of axes. Based on the plot, will $P_2(x)$ overestimate or underestimate $f(x)$ for values of $x$ on this interval (that are not node points)? 
+
+Note: you can use something like {\tt x = pi*(-1:0.01:1)} in Matlab to get evenly-spaced points on the interval for plotting.
+
+\item  Use $P_2(x)$ to give an approximation to $\displaystyle f\left(\frac{\pi}{2}\right)$. Give an upper bound on the error based on the formula seen in class, and verify that the true error $\displaystyle f \left( \frac{\pi}{2}\right) - P_2\left( \frac{\pi}{2}\right)$ is within the computed bound.
+\end{enumerate}
+{\bf Please include a copy of your plot for part (c)}.
+
+\medskip
+
+%%%Question 2
+\item  {\bf [8 points]} Suppose we have $n+1$ data points $(x_i, y_i)$, $i=0 \dots n$. Let $P_{n-1} (x)$ be the Lagrange interpolant of the data from $i=0 \dots n-1$, and let $Q_{n-1}(x)$ be the Lagrange interpolant of the data for $i = 1 \dots n$. Show that the Lagrange polynomial that interpolates all of the points can be written as
+\begin{equation*}
+P_n(x) = \frac{ (x-x_0)Q_{n-1}(x) + (x_n-x) P_{n-1}(x)}{x_n - x_0}.
+\end{equation*}
+
+Hint: You must show that it interpolates all of the points and that it has the appropriate degree.
+
+This gives a way of constructing a Lagrange interpolant from two lower-order interpolants, which is sometimes useful.
+
+\end{enumerate}
+
+\end{document}
+
